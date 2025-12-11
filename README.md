@@ -74,17 +74,21 @@
 ### Запуск
 
 Валидационное разбиение
+
 `data_train, data_val, gt_val = get_validation_split(df=df_train,timestamp_to_split="2020-02-16")`
 
 Анализ популярности
+
 `popular_products = data_train.groupby(['product_id']).size().sort_values(ascending=False)`
 
 Построение профилей пользователей
+
 `user_brands = pd.pivot_table(df_test,index=['user_id'],values=['brand'],aggfunc=lambda x: np.array(list(dict.fromkeys(x)))[:3])`
 
 `user_avg_price = df_test.groupby(['user_id'])['price'].mean()`
 
 Создание рекомендаций
+
 `recommendations = []`
 
 `for user_id in df_test['user_id'].unique():`
