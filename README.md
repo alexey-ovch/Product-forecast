@@ -81,13 +81,18 @@
 
 Построение профилей пользователей
 `user_brands = pd.pivot_table(df_test,index=['user_id'],values=['brand'],aggfunc=lambda x: np.array(list(dict.fromkeys(x)))[:3])`
+
 `user_avg_price = df_test.groupby(['user_id'])['price'].mean()`
 
 Создание рекомендаций
 `recommendations = []`
+
 `for user_id in df_test['user_id'].unique():`
+
 `personalized = filter_by_brand_and_price(user_id, user_brands, user_avg_price)`
+
 `top_3 = personalized[:3] if len(personalized) >= 3 else personalized + list(popular_products[:3-len(personalized)])`
+
 `recommendations.append(top_3)`
 
 ### Формат вывода
